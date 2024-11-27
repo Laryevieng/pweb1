@@ -1,0 +1,118 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+  
+    margin: 0;
+    padding: 0;
+  }
+
+  nav {
+    background-color: #00a2c6;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    position: sticky;
+    top: 0;
+  }
+
+  nav a {
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none; 
+    color: white;
+  }
+  
+  nav li {
+    padding: 8px;
+    border-radius: 8px;
+    display: inline;
+    list-style-type: none;
+    margin-right: 20px;
+  }
+
+  nav li:hover {
+    background-color: #00c8eb;
+  }
+
+  .jumbotron {
+    font-size: 20px;
+    padding: 60px;
+    text-align: center;
+    color: white;
+    background-image: url('fkom.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+    background-position: top;
+  }
+  
+/* Main Content Styles */
+  main {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    
+    font-weight: normal;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.vision-text {
+    font-style: italic;
+    font-size: 18px;
+    margin-bottom: 25px;
+    line-height: 1.4;
+    padding-left: 20px;
+    color: #000;
+}
+
+.content-list {
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+.content-list li {
+    font-size: 18px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    color: #000;
+}
+
+.navbar {
+    display: flex;
+    width: 100%;
+    align-items: center; /* Optional: jika Anda ingin elemen dalam satu garis horizontal */
+}
+
+.search-section {
+    margin-left: auto; /* Memindahkan elemen ini ke sisi kanan */
+    margin-right: 32px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.search-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  #searchBox {
+    width: 70%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+  }
+  
+  #searchBox:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+  }
+
+

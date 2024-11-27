@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="bil1">
+    <select name="opr" id="opr">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+    </select>
+    <input type="text" name="" id="bil2">
+     
+    <script>
+        function Hitung(){
+            let bil1= document.getElementById ('bil1').value;
+            let bil2= document.getElementById ('bil2').value;
+            let opr= document.getElementById ('opr').value;
+            let bil3;
+
+            switch (opr){
+                case "+":
+                    bil3 = parseFloat(bil1) + parseFloat (bil2);
+                    break;
+
+                case "-":
+                    bil3 = parseFloat(bil1) - parseFloat (bil2);
+                    break;
+                
+                case "*":
+                    bil3 = parseFloat(bil1) * parseFloat (bil2);
+                    break;
+
+                case "/":
+                    bil3 = parseFloat(bil1) / parseFloat (bil2);
+                    break;
+
+                case "%":
+                    bil3 = parseFloat(bil1) % parseFloat (bil2);
+                    break;
+
+                default:
+                    alert("Operasi tidak dikenal");
+                    bil3;
+            }
+        
+        }
+    </script>
+</body>
+</html>
