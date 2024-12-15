@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengelolaan Lowongan Pekerjaan</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Judul -->
+        <div class="text-center mb-4">
+            <h1>Pengelolaan Lowongan Pekerjaan</h1>
+        </div>
+
+        <!-- Form Input Lowongan -->
+        <form id="jobForm" class="mb-4 p-4 border rounded shadow-sm bg-light">
+            <h4 class="mb-3">Tambah Lowongan</h4>
+            <div class="form-group">
+                <label for="jobID">ID Pekerjaan:</label>
+                <input type="text" class="form-control" id="jobID" placeholder="Masukkan ID pekerjaan" required>
+            </div>
+            <div class="form-group">
+                <label for="jobTitle">Judul Pekerjaan:</label>
+                <input type="text" class="form-control" id="jobTitle" placeholder="Masukkan judul pekerjaan" required>
+            </div>
+            <div class="form-group">
+                <label for="jobCompany">Perusahaan:</label>
+                <input type="text" class="form-control" id="jobCompany" placeholder="Nama perusahaan" required>
+            </div>
+            <div class="form-group">
+                <label for="jobLocation">Lokasi:</label>
+                <input type="text" class="form-control" id="jobLocation" placeholder="Lokasi pekerjaan" required>
+            </div>
+            <div class="form-group">
+                <label for="jobDescription">Deskripsi Pekerjaan:</label>
+                <textarea class="form-control" id="jobDescription" rows="3" placeholder="Deskripsi pekerjaan" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Tambah Lowongan</button>
+        </form>
+
+        <!-- Tabel Data Lowongan -->
+        <h4 class="mb-3">Daftar Lowongan Pekerjaan</h4>
+        <table class="table table-striped table-bordered shadow-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID Pekerjaan</th>
+                    <th>Judul</th>
+                    <th>Perusahaan</th>
+                    <th>Lokasi</th>
+                    <th>Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody id="jobTableBody">
+                <!-- Data akan dimuat di sini -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            const script_url = "https://script.google.com/macros/s/AKfycbw9ijmQK5lXcXi5H3os11JoO3CPtwmrye6sMwirSjNuQkK6bcX8TLisNNnn6R40DUv6nA/exec"; // URL Google Apps Script
+            loadJobs();
+
+            // Handle form submit
+            $('#jobForm').on('submit', function (event) {
+                event.preventDefault();
+                const id = $('#jobID').val();
+                const title = $('#jobTitle').val();
+                const company = $('#jobCompany').val();
+                const location = $('#jobLocation').val();
+                const description = $('#jobDescription').val();
+
+                $.ajax({
+                    url: script_url,
+                    type: "GET",
+                    dataType: "jsonp",
+                    data: {
+                        id: id,
+                        title: title,
+                        company: company,
+                        location: location,
+                        description: description,
+                        action: 'insert'
+                    },
+                    success: function (response) {
+                        alert(response.result);
+                        loadJobs(); // Refresh data~
+                        $('#jobForm')[0].reset(); // Reset form
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error("Request failed: ", textStatus, errorThrown);
+                    }
+                });
+            });
+
+            // Load data lowongan ke tabel
+            function loadJobs() {
+                $.ajax({
+                    url: script_url,
+                    type: "GET",
+                    data: { action: "read" },
+                    dataType: "json",
+                    success: function (response) {
+                        const tbody = $("#jobTableBody");
+                        tbody.empty(); // Kosongkan tabel
+                        response.forEach((job) => {
+                            tbody.append(`
+                                <tr>
+                                    <td>${job.ID}</td>
+                                    <td>${job.Title}</td>
+                                    <td>${job.Company}</td>
+                                    <td>${job.Location}</td>
+                                    <td>${job.Description}</td>
+                                </tr>
+                            `);
+                        });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error("Request failed: ", textStatus, errorThrown);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
